@@ -1,7 +1,6 @@
 const Product = require("../models/Product.model")
 //set up cloudinary for product images
 
-//uplorad middlewares in this route
 exports.createProcess = async (req, res, next) => {
     try {
         const product = {...req.body}
