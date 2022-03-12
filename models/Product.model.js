@@ -1,7 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const productSchema =  new Schema({
-    title: {
+    name: {
+        type: String,
+        required: [true, "the product need a title"]
+    },
+    name_jp: {
         type: String,
         required: [true, "the product need a title"]
     },
@@ -14,10 +18,17 @@ const productSchema =  new Schema({
         type: String,
         required: [true, "the product need a description"]
     },
-    images: {
+    description_jp: {
+        type: String,
+        required: [true, "the product need a description"]
+    },
+    // images: {
+    //     type: [String],
+    //     min:[1],
+    // },
+    flavor: {
         type: [String],
-        min:[1],
-
+        min:[],
     },
     stock: {
         type: Number,

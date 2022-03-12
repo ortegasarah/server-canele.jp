@@ -12,4 +12,6 @@ router.post("create", createProcess)
 router.get("/", listProcess)
 
 //get details of one product
-router.get("/:id", productController)
+router.get("/:id", detailProcess)
+
+module.exports = router;
