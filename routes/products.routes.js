@@ -2,11 +2,11 @@ const router = require("express").Router()
 const { createProcess, listProcess, detailProcess} = require("../controllers/product.controller")
 //uplorad middlewares in this route
 
-
+const {checkRole,verifyToken} = require("../middleware/util-mid")
 
 //for ADMIN
 //create products
-router.post("create", createProcess) 
+router.post("/create",verifyToken,checkRole(["STAFF","ADMIN"]) ,createProcess);
 
 //to get all the products
 router.get("/", listProcess)
