@@ -4,10 +4,13 @@ const Product = require("../models/Product.model")
 exports.createProcess = async (req, res, next) => {
     try {
         const product = {...req.body}
-        Product.create(product)
+        console.log("product", product)
+        const result = await Product.create(product)
         res.status(200).json({ result });
     } catch (error) {
+      console.log("erro", error)
       res.status(400).json({ errorMessage: error });
+
     }
   };
 

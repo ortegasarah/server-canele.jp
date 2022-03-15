@@ -9,6 +9,10 @@ const productSchema =  new Schema({
         type: String,
         required: [true, "the product need a title"]
     },
+       images: {
+        type: [String],
+        min:[1],
+    },
     price: {
         type: Number,
         required: [true, "the product need a price"],
@@ -22,13 +26,13 @@ const productSchema =  new Schema({
         type: String,
         required: [true, "the product need a description"]
     },
-    // images: {
-    //     type: [String],
-    //     min:[1],
-    // },
-    flavor: {
-        type: [String],
-        min:[],
+    flavors: {
+            white: String,
+			almond: String,
+			roasted_green_tea: String,
+			roasted_black_soy_flour: String,
+			matcha_red_bean: String,
+			brown_sugar_walnut: String
     },
     stock: {
         type: Number,
