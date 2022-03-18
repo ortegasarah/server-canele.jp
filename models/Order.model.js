@@ -20,10 +20,18 @@ const orderSchema =  new Schema({
         }],
         min: [1, "the order needs at least one products"]
     },
+    address: {
+        type: String,
+        required: true
+    },
     status: {
         type: String,
-        enum: ["Waiting", "Shipped", "Received"],
+        enum: ["Waiting", "Approved", "Preparing your Order", "Your order is on its way!", "Delivered"],
         default: "Waiting",
+    },
+    method: {
+        type: Number,
+        required: true
     }
 }, {timestamps: true})
 

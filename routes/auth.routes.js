@@ -134,6 +134,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         }
         Session.create({ user: user._id, createdAt: Date.now() }).then(
           (session) => {
+            res.redirect('/profile');
             return res.json({ user, accessToken: session._id });
           }
         );
