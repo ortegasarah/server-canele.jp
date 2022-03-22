@@ -12,7 +12,7 @@ const productSchema = new Schema({
         type: String,
         required: [true, "the product need a title"]
     },
-    images: {
+    image_url: {
         type: [String],
         min: [1],
     },

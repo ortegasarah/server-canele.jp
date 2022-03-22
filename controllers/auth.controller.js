@@ -9,15 +9,21 @@ const saltRounds = 10;
 const {createJWT,clearRes} = require("../middleware/util-mid");
 
 exports.signupProcess = (req, res, next) => {
-  //Destructuramos del body lo que necesitamos para poder registrar con los datos relevantes!
-  //{email,password,confirmPassword,...rest} = req.body
-  const { email, password, confirmPassword, ...rest } = req.body;
-
-  //validaciones!!!!
+  const { firstName, lastName, email, password, confirmPassword, ...rest } = req.body;
+  if (!firstName) {
+    return res
+      .status(400)
+      .json({ errorMessage: "You have to put a fist name" });
+  }
+  if (!lastName) {
+    return res
+      .status(400)
+      .json({ errorMessage: "You have to put a last name" });
+  }
   if (!email) {
     return res
       .status(400)
-      .json({ errorMessage: "Oye por favor manda un correo" });
+      .json({ errorMessage: "You have to fill an email" });
   }
 
   if (password.length < 8) {
@@ -45,13 +51,15 @@ exports.signupProcess = (req, res, next) => {
       .then((hashedPassword) => {
         //create User
         return User.create({
+          firstName,
+          lastName,
           email,
           password: hashedPassword,
         });
       })
       .then((user) => {
         //create JSONWEbTOKEN.sign
-        const [header, payload, signature] = createJWT(user)
+        const [header, payload, signature] = createJWT(user._id)
 
         res.cookie("headload", `${header}.${payload}`, {
           maxAge: 1000 * 60 * 30,

@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema(
   {
-    name: String,
+    firstName: String,
+    lastName: String,
     email: {
       type: String,
       require: [true, "you need to fill the email"],
