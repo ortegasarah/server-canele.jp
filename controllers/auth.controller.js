@@ -87,13 +87,13 @@ exports.signupProcess = (req, res, next) => {
           maxAge: 1000 * 60 * 30,
           httpOnly: true,
           sameSite: "none",
-          secure: false,
+          secure: true,
         });
 
         res.cookie("signature", signature, {
           httpOnly: true,
           sameSite: "none",
-          secure: false,
+          secure: true,
         });
 
         const newUser = clearRes(user.toObject())
@@ -144,13 +144,13 @@ exports.loginProcess = async (req, res, next) => {
         maxAge: 1000 * 60 * 30,
         httpOnly: true,
         sameSite: "none",
-        secure: false,
+        secure: true,
       });
 
       res.cookie("signature", signature, {
         httpOnly: true,
         sameSite: "none",
-        secure: false,
+        secure: true,
       });
       const newUser = clearRes(user.toObject())
       res.status(200).json({
@@ -187,13 +187,13 @@ exports.logoutProcess = (req, res, next) => {
   res.clearCookie('headload', {
     httpOnly: true,
     sameSite: "none",
-    secure: false,
+    secure: true,
   })
 
   res.clearCookie("signature", {
     httpOnly: true,
     sameSite: "none",
-    secure: false,
+    secure: true,
   })
   res.status(200).json({
     result: "You have been logged out"
