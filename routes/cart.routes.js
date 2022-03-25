@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { findCartProcess, createCartProcess, deleteCartProcess} = require("../controllers/cart.controller")
+const { findCartProcess, createCartProcess, deleteCartProcess } = require("../controllers/cart.controller")
 
   
   //get cart
@@ -10,11 +10,5 @@ const { findCartProcess, createCartProcess, deleteCartProcess} = require("../con
   
   //delete
   router.delete("/delete", deleteCartProcess);
-  
-  /**
-   * delete
-   *  put
-   *  patch
-   */
   
   module.exports = router;

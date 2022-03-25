@@ -94,12 +94,13 @@ exports.signupProcess = (req, res, next) => {
 
 exports.loginProcess = async (req, res, next) => {
   try {
+    //destructurar
     const { email, password } = req.body;
     const user = await User.findOne({email})
     if(!user){
         return res
         .status(400)
-        .json({ errorMessage: "Problem " })
+        .json({ errorMessage: "Oye tus credenciales son erroneas " })
     }
     const match = await bcrypt.compareSync(password, user.password)
     if(match){
@@ -117,13 +118,13 @@ exports.loginProcess = async (req, res, next) => {
         sameSite: true,
         secure:false,
       });
-      //Delete password
+      //borrar contraseña!!!!els
       const newUser = clearRes(user.toObject())
       res.status(200).json({ user:newUser })
     }else{
         res
         .status(400)
-        .json({ errorMessage: "Problem" })
+        .json({ errorMessage: "Oye tus credenciales son erroneas " })
     }
 
 
@@ -134,7 +135,7 @@ exports.loginProcess = async (req, res, next) => {
       if (error.code === 11000) {
         return res.status(400).json({
           errorMessage:
-            "error",
+            "mensaje de error",
         });
       }
       return res.status(500).json({ errorMessage: error.message })

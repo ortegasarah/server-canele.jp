@@ -1,5 +1,16 @@
 const Order = require("../models/Order.model");
 
+exports.createOrderProcces = async (req,res,next)=>{
+    try{
+        const { _id: _client } = req.user;
+        const order = { ...req.body, _client };
+        const result = await Order.create(order)
+        res.status(200).json({ result });
+    }catch(error){
+        res.status(400).json({errorMessage:error})
+    }
+}
+
 exports.getOrdersProcces = async (req, res, next) => {
     try{
         const { _id: _client } = req.user;
@@ -21,13 +32,3 @@ exports.getOrderbyIdProccess = async (req,res,next) => {
     }
 }
 
-exports.createOrderProcces = async (req,res,next)=>{
-    try{
-        const { _id: _client } = req.user;
-        const order = { ...req.body, _client };
-        const result = await Order.create(order)
-        res.status(200).json({ result });
-    }catch(error){
-        res.status(400).json({errorMessage:error})
-    }
-}

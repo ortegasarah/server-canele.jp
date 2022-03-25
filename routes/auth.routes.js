@@ -15,6 +15,8 @@ const Session = require("../models/Session.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
+
+
 router.get("/session", (req, res) => {
   // we dont want to throw an error, and just maintain the user as null
   if (!req.headers.authorization) {
@@ -35,7 +37,19 @@ router.get("/session", (req, res) => {
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
+
+  if (!firstName) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide your first name." });
+  }
+
+  if (!lastName) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide your last name." });
+  }
 
   if (!email) {
     return res
@@ -94,7 +108,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         if (error.code === 11000) {
           return res.status(400).json({
             errorMessage:
-              "email need to be unique. The email you chose is already in use.",
+              "email needs to be unique. The email you chose is already in use.",
           });
         }
         return res.status(500).json({ errorMessage: error.message });
@@ -132,9 +146,10 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         if (!isSamePassword) {
           return res.status(400).json({ errorMessage: "Wrong credentials." });
         }
-        Session.create({ user: user._id, createdAt: Date.now() }).then(
+        Session.create({ user: user._id, createdAt: Date.now() })
+        .then(
           (session) => {
-            res.redirect('/profile');
+            // res.json({/profile })
             return res.json({ user, accessToken: session._id });
           }
         );
