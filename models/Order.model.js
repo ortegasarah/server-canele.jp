@@ -20,19 +20,17 @@ const orderSchema =  new Schema({
         }],
         min: [1, "the order needs at least one products"]
     },
-    address: {
-        type: String,
-        required: true
-    },
+    //To use later
+    // address: {
+    //     type: String,
+    //     required: true
+    // },
     status: {
         type: String,
         enum: ["Waiting", "Approved", "Preparing your Order", "Your order is on its way!", "Delivered"],
         default: "Waiting",
     },
-    method: {
-        type: Number,
-        required: true
-    }
+    
 }, {timestamps: true})
 
 module.exports = model("Order", orderSchema);

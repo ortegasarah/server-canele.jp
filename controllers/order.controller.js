@@ -7,6 +7,7 @@ exports.createOrderProcces = async (req,res,next)=>{
         const result = await Order.create(order)
         res.status(200).json({ result });
     }catch(error){
+        console.log("ereror  createorder",error)
         res.status(400).json({errorMessage:error})
     }
 }
